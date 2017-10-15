@@ -657,7 +657,7 @@ public class Test{
 			   break;
 
 		   default:
-			   tmp.nextLine(); //消除回车换行
+			   tmp.nextLine();
 			   System.out.println("请输入正确序号！");
 			   break;
 
