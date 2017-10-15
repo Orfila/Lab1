@@ -132,7 +132,6 @@ try {
 FileInputStream in = new FileInputStream(img.getAbsolutePath());
          img_stream = new byte[in.available()];
          in.read(img_stream);
-         // Close it if we need to
          if( in != null ) in.close();
 
 if (img.delete() == false)
