@@ -18,7 +18,7 @@ public class Test{
  * 功能：将文件内容转化为待处理字符串
  * 参数loc：文件位置
  * 参数name：文件名称
-* */	
+* */
   public static String InputFile(String loc,String name){
 	  String str =new String();
 	  try{
@@ -40,24 +40,24 @@ public class Test{
 	      System.out.println("请输入合法路径！");
 	      return str;
 	  }
-} 
+}
 
   /*
    * 功能：创建边组
    * 参数txt：处理好后文本
-   * */  
+   * */
   public static String[][] EdgesCreate(String txt){
 	  String[] ntxt = txt.split(" "); //字符串转换为字符串组
 	  int len = ntxt.length;
-	  
-	  String[][] Edges = new String[len-1][2]; 
+
+	  String[][] Edges = new String[len-1][2];
 	  for(int i= 0; i < len-1 ; i++ ){
 		  Edges[i][0] = ntxt[i];
 		  Edges[i][1] = ntxt[i+1];
 	  }
 	  return Edges;
   }
-  
+
   /*
    * 功能：创建点组
    * 参数txt：处理好后的文本
@@ -78,7 +78,7 @@ public class Test{
 		   Vertexs[i] = tmpver[i];
 	   return Vertexs;
    }
- 
+
    /*
     * 功能：计算边的权值，并删除重复边
     * 参数Edges：处理好的边组
@@ -88,7 +88,7 @@ public class Test{
 	   for(int i = 0; i < Edges.length; i++){
 		   tmpedge[i] = Edges[i][0] + " " + Edges[i][1];
 	   }
-	   
+
 	   String[] tmpedge1 = new String[tmpedge.length];     //删除重复的字符串（即删除重复边）
 	   int count = 0;
 	   for(int i = 0; i < tmpedge.length; i++){
@@ -101,10 +101,10 @@ public class Test{
 	   String[] tmp = new String[count];
 	   for (int i = 0; i < count; i++)
 		   tmp[i] = tmpedge1[i];
-	   
+
 	   int weight[] = CountWeight(tmpedge,tmp);        //计算边的权值
-	   
-	   String[][] EdgesWeight = new String[tmp.length][3];  
+
+	   String[][] EdgesWeight = new String[tmp.length][3];
 	   for(int i = 0; i < tmp.length; i++){
 		   String[] tran = tmp[i].split(" ");
 		   EdgesWeight[i][0] = tran[0];
@@ -113,7 +113,7 @@ public class Test{
 	   }
 	   return EdgesWeight;
    }
- 
+
    /*
     * 功能：计算边的权值
     * 参数Edges：将一条边的两个节点合为一个字符串的字符串数组（包含重复边）
@@ -149,8 +149,8 @@ public class Test{
 			   matrix[i][j] = Integer.MAX_VALUE;
 		   }
 	   }
-	   
-	   for(int i = 0; i < edges.length; i++){       
+
+	   for(int i = 0; i < edges.length; i++){
 		   x = Arrays.binarySearch(vertexs, edges[i][0]);      //利用二分查找查找节点对应序号
 		   y = Arrays.binarySearch(vertexs, edges[i][1]);
 		   matrix[x][y] = Integer.parseInt(edges[i][2]);
@@ -170,7 +170,7 @@ public class Test{
 	    	  gv.addln(Edgesweight[i][0]+"->"+Edgesweight[i][1]+" [ label = \" " + Edgesweight[i][2]+"\" ] ;");
 	      }
 	      gv.addln(gv.end_graph());
-	      
+
 	      String type = "png";
 	      File out = new File("C:\\test\\out." + type);    // Windows
 	      gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type ), out );
@@ -188,12 +188,12 @@ public class Test{
 		   temp[i][1] = vertexs[i+1];
 		   temp[i][2] = vertexs[i+2];
 	   }
-	   
+
 	   String[] temp1 = new String[temp.length];       //删除重复桥
 	   for(int i = 0; i < temp.length; i++){
 		   temp1[i] = temp[i][0] + " " + temp[i][1] + " " + temp[i][2];
 	   }
-	   String[] temp2 = new String[temp.length];    
+	   String[] temp2 = new String[temp.length];
 	   int count = 0;
 	   for(int i = 0; i < temp1.length; i++){
 		   String temp3 = temp1[i];
@@ -205,7 +205,7 @@ public class Test{
 	   String[] temp4 = new String[count];
 	   for (int i = 0; i < count; i++)
 		   temp4[i] = temp2[i];
-	   
+
 	   for(int i = 0; i < temp4.length; i++){          //生成不包括重复桥的桥接词矩阵
 		   String[] temp5 = temp4[i].split(" ");
 		   Bridges[i][0] = temp5[0];
@@ -234,7 +234,7 @@ public class Test{
 		   if(Bridge.length == 0){        //不存在桥接词
 			   return BridgeWords;
 		   }
-		   else{ 
+		   else{
 			   for(int i = 0; i < Bridge.length; i++){               //存在桥接词
 				   BridgeWords = BridgeWords + Bridge[i] + " ";
 			   }
@@ -257,7 +257,7 @@ public class Test{
 	   String[] Bridge = new String[0];
 	   return Bridge;
    }
-   
+
    /*
     * 功能：求两词中间的桥接词矩阵
     * 参数begin、end：待查询的两个单词
@@ -283,7 +283,7 @@ public class Test{
 	   }
 	   return BridgeWord;
    }
-   
+
    /*
     * 功能：根据桥接词生成新文本
     * 参数inputText：用户输入的文本
@@ -312,33 +312,33 @@ public class Test{
 	   }
 	   return NewText;
    }
-   
+
    /*
     * 功能：Dijkstra法求最短路径
     * 参数point：最短路径的起点
-    * */  
+    * */
    public static void Dijkstra(int point){
 	   int i,j,k;
 	   int n = matrix.length;
 	   path = new int[n];
 	   visited = new int[n];
 	   int[] weight = new int[n];
-	   
+
 	   for(i = 0;i < n; i++)
 		   weight[i] = matrix[point][i];
-	   
+
 		for (i = 0; i < n; i++) {
 			if (weight[i] < Integer.MAX_VALUE) {
 				path[i] = point;
 			}
 		}
-		
+
 		for (i = 0; i < n; i++)
 			visited[i] = 0;
-		
-		visited[point] = 1;		
+
+		visited[point] = 1;
 		weight[point] = 0;
-		
+
 		for (i = 0; i < n; i++) {
 			int min = Integer.MAX_VALUE;
 			k = point;
@@ -357,7 +357,7 @@ public class Test{
 			}
 		}
    }
-   
+
    /*
     * 功能：求两个单词间的最短路径
     * 参数word1&word2：所要求的单词
@@ -377,7 +377,7 @@ public class Test{
 	   }
         Dijkstra(p1);
         String NewText = new String();
-		i = p2;		
+		i = p2;
 		String[] str = new String[matrix.length];
 		j = 0;
 		if (i == p1) {
@@ -401,7 +401,7 @@ public class Test{
 			NewText += str[0] + "!";
 		}
 		return NewText;
-	   	   
+
    }
 
    /*
@@ -419,7 +419,7 @@ public class Test{
 			   return;
 		   }
 	        Dijkstra(p1);
-	        
+
            int n = matrix.length;
 		   for (i = 0; i < n; i++) {
 			   String[] str = new String[n];
@@ -445,10 +445,10 @@ public class Test{
 			   }
 		}
 		   return;
-	}  
+	}
 
 	// 随机游走。
-	
+
 	/*
 	 *功能：随机产生一条可达边
 	 *参数x:起始点
@@ -470,9 +470,9 @@ public class Test{
 			return l[0];
 		else
 			return -1;
-		
+
 	}
-	
+
 	/*
 	 * 功能：文件写入
 	 * 参数name：文件名称
@@ -487,8 +487,8 @@ public class Test{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	}	
-	
+	}
+
 	/*
 	 * 功能：程序随机的从图中选择一个节点，以此为起点沿出边进行随机遍历，记录经 过的所有节点和边，
 	 * 直到出现第一条重复的边为止，或者进入的某个节点不存在出边为止
@@ -498,21 +498,21 @@ public class Test{
 		int ransp;
 		String result = new String();
 		ransp = (int)(Math.random()*len);//产生随机节点
-		
+
 		int[][] used = new int[len][len];
 		for (int i = 0; i < len; i++)
 			for (int j = 0; j < len; j++)
 			    used[i][j] = -1;
-		
+
 		int a =ransp;
 		result += v[a];
-        
+
 		while (random(a) != -1) {
 			int b = random(a);//产生随机边
 			if (used[a][b] == 1){
 				result += (" " + v[b]);
 				break;
-			}				
+			}
 			else {
 				result += (" " + v[b]);
 				used[a][b] = 1;
@@ -521,10 +521,10 @@ public class Test{
 		}
 		System.out.println(result);
 		return result;
-	}	
-	
+	}
+
    public static void main(String args[]){
-	   
+
 	   System.out.println("欢迎使用！");
 	   Scanner tmp = new Scanner(System.in);
 	   //导入文本
@@ -538,19 +538,19 @@ public class Test{
 		   name = tmp.nextLine();
 		   test = InputFile(loc,name);
 		   if(test.equals("") != true){
-			   System.out.println("文件导入成功！");	
+			   System.out.println("文件导入成功！");
 			   break;
 		   }
 	   }
-	   
-	   v = VerCreate(test);//顶点集合	   
-	   edges = EdgesCreate(test);//边集集合	   
-	   String[][] edgeweight = EdgeWeight(edges);//计算边的权值	   
+
+	   v = VerCreate(test);//顶点集合
+	   edges = EdgesCreate(test);//边集集合
+	   String[][] edgeweight = EdgeWeight(edges);//计算边的权值
 	   Arrays.sort(v);
 	   matrix = Matrix(edgeweight,v);//邻接矩阵
-	   
+
 	   while(true){
-		   
+
 		   System.out.println("以下是功能列表：");
 		   System.out.println("1.生成图像");
 		   System.out.println("2.查桥接词");
@@ -561,15 +561,15 @@ public class Test{
 		   System.out.println("0.退出程序");
 		   System.out.println("====================");
 		   System.out.println("请输入功能序号：");
-		   
-		   int num = tmp.nextInt();	
+
+		   int num = tmp.nextInt();
 		   switch(num){
 		   case 1:
 			   System.out.println("欢迎使用生成图像功能！");
 			   showDirectedGraph(edgeweight);
 			   System.out.println("图像生成成功！");
 			   break;
-			   
+
 		   case 2:
 			   System.out.println("欢迎使用查询桥接词功能！");
 			   System.out.println("请输入需要查询桥接词的两个单词(两个单词之间用换行符分隔）：");
@@ -599,10 +599,10 @@ public class Test{
 					   }
 					   System.out.println("and " + bridgeWords[bridgeWords.length-1] + ".");
 				   }
-				   
-			   } 
+
+			   }
 			   break;
-			   
+
 		   case 3:
 			   System.out.println("欢迎使用生成新句子功能！");
 			   System.out.println("请输入文本：");
@@ -615,7 +615,7 @@ public class Test{
 			   System.out.println("生成的新文本为：");
 			   System.out.println(NewText);
 			   break;
-			   
+
 		   case 4:
 			   System.out.println("欢迎使用查询最短路径（两个单词）功能！");
 			   System.out.println("请输入需要查询的单词：");
@@ -623,7 +623,7 @@ public class Test{
 			   String word2 = new String();
 			   tmp.nextLine();//消除回车换行
 			   word1 = tmp.nextLine();
-			   word2 = tmp.nextLine();				   
+			   word2 = tmp.nextLine();
 			   String res = new String();
 			   res = calcShortestPath(word1,word2);
 			   System.out.println(res);
@@ -637,34 +637,33 @@ public class Test{
 			   word = tmp.nextLine();
 			   calcShortestPathOne(word);
 			   break;
-			   
+
 		   case 6:
 			   System.out.println("欢迎使用随机游走功能！");
 			   System.out.println("请1继续随机游走！输入其他结束随机游走");
-			   
+
 			   String tp2 = new String();
 			   tmp.nextLine();
 			   while (tmp.nextInt() == 1) {
 					tp2 += randomWalk();
 					tp2 += "\t\n";
 					WriteIn("random.txt", tp2);
-			   }			   
+			   }
 			   break;
-			   
+
 		   case 0:
 			   System.out.println("感谢使用，再见！");
 			   System.exit(0);
 			   break;
-			   
+
 		   default:
 			   tmp.nextLine(); //消除回车换行
 			   System.out.println("请输入正确序号！");
 			   break;
-		      
+
 		   }
-		   
-	   } 
-   //tmp.close();  
+
+	   }
    }
 
 }
